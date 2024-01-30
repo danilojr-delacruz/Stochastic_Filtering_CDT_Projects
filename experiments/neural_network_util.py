@@ -1,6 +1,7 @@
 """
 Utility functions for Neural Network.
 Original code from Alexander Lobbe and converted into PyTorch.
+https://arxiv.org/abs/2201.03283
 
 PDESolver is to solve the Linear Filtering Problem. It has a:
 - Details of PDE: E.g. pde_coeffs, initial_condition and time-space domain

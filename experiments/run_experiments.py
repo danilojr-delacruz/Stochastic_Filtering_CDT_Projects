@@ -1,3 +1,11 @@
+"""
+Script to run the experiments.
+`python3 run_experiments.py`
+
+Original code from Alexander Lobbe and converted into PyTorch.
+https://arxiv.org/abs/2201.03283
+"""
+
 import time
 import os
 import numpy as np

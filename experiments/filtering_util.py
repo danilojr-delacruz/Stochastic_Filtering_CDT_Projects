@@ -1,7 +1,9 @@
 """
 Utility functions for solving Filtering Equation.
 Original code from Alexander Lobbe and converted into PyTorch.
+https://arxiv.org/abs/2201.03283
 """
+
 import time
 import torch
 
