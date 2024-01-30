@@ -24,6 +24,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from torch.utils.data import Dataset
+from torch.optim.lr_scheduler import StepLR
 
 
 PLOT_LEVEL = 0
@@ -226,6 +227,15 @@ class PDESolver(lightning.LightningModule):
 
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(self.parameters(), lr=1e-2)
+        # Use Constant Learning Rate
+        # # Decay the learning rate by 0.1 every 200 steps
+        # scheduler = StepLR(optimizer, step_size=300, gamma=0.7)
+        # return {
+        #     "optimizer": optimizer,
+        #     "lr_scheduler": {
+        #         "scheduler": scheduler
+        #     }
+        # }
         return optimizer
 
     def __call__(self, x):
@@ -363,13 +373,14 @@ class UniformDomainDataset(Dataset):
 # _get_sobol_values to use a custom formula as we have for LinearFilterPDESolver
 class MCReference:
     """Contains sobol points and diffusion simulator"""
-    def __init__(self, dim, domain, T, ou_coefs, initial_condition):
+    def __init__(self, dim, domain, T, ou_coefs, initial_condition,
+                 num_diffusions_per_point=2**10):
         self.dim = dim
         # Domain needs to be normal number
         self.domain   = domain
         self.T        = torch.tensor(T, dtype=torch.float32)
         self.ou_coefs = torch.tensor(ou_coefs, dtype=torch.float32)
-        self.num_diffusions_per_point = 2**10
+        self.num_diffusions_per_point = num_diffusions_per_point
         self.auxiliary_diffusion = AuxiliaryLinearDiffusion(
             ou_coefs, self.num_diffusions_per_point)
         self.initial_condition = initial_condition
