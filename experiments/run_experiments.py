@@ -24,7 +24,6 @@ def gaussian_pdf(x, mean, std):
 
 TIMESTAMP = time.strftime("%y-%m-%d_%H-%M-%S")
 RESULT_DIR = f"./results/{TIMESTAMP}"
-os.makedirs(RESULT_DIR, exist_ok=True)
 
 # TODO: Use CUDA at some point
 ACCELERATOR = "cpu"
@@ -202,7 +201,7 @@ def experiment(use_quasi_mc, use_modified_loss, N1, N2):
         "epochs": MAX_EPOCHS,
         "resolution": RESOLUTION
     }
-
+    print("Saving to", f"{RESULT_DIR}/{filename}")
     np.savez(f"{RESULT_DIR}/{filename}",
                 time_grid               = np.arange(NUM_STEPS+1)*delta_t,
                 domain                  = np.array(DOMAIN),
@@ -228,6 +227,9 @@ def experiment(use_quasi_mc, use_modified_loss, N1, N2):
 
 
 if __name__ == '__main__':
+    # Avoid making directions every time this file is invoked
+    os.makedirs(RESULT_DIR, exist_ok=True)
+
     for use_quasi_mc in [True, False]:
         for use_modified_loss in [True, False]:
             # Ensure N1*N2 constant for fair comparison
