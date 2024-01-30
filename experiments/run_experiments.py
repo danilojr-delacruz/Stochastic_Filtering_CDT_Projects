@@ -107,7 +107,7 @@ def experiment(use_quasi_mc, use_modified_loss, N1, N2):
         ### 1. Splitting up method step 1: Prediction (solving PDE)
         ##  1.1 Use neural network to solve PDE
         neural_network = BasicNet(NEURONS, INPUT_DIMENSION, DOMAIN)
-        pde_solver     = LinearFilwterPDESolver(
+        pde_solver     = LinearFilterPDESolver(
                                COEFFS, initial_condition,
                                delta_t, DOMAIN, INPUT_DIMENSION,
                                neural_network,
