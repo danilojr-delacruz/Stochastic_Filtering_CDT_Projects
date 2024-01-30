@@ -35,6 +35,7 @@ def generate_figure_1():
     plt.legend(loc="upper right")
     plt.xlabel(r"$x$")
     plt.savefig(f"{OUTPUT_DIR}/stochastic_approximations.png")
+    plt.close()
 
 
 def generate_figure_2():
@@ -91,6 +92,7 @@ def generate_figure_2():
     _ax.legend()
 
     plt.savefig(f"{OUTPUT_DIR}/residual_distributions.png")
+    plt.close()
 
 
 def generate_figure_3():
@@ -133,6 +135,7 @@ def generate_figure_3():
     plt.title("Smoothened Loss")
     plt.savefig(f"{OUTPUT_DIR}/smoothened_loss.png", bbox_inches="tight")
     plt.clf()
+    plt.close()
 
 
 COMMANDS = [
